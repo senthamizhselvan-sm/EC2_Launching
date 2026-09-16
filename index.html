@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grand Line — One Piece</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        linear-gradient(rgba(3, 18, 35, 0.25), rgba(2, 10, 25, 0.75)),
+        linear-gradient(#38bdf8 0%, #0284c7 45%, #082f49 100%);
+    }
+
+    /* Sky */
+
+    .sky {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .cloud {
+      position: absolute;
+      width: 180px;
+      height: 55px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 100px;
+      filter: blur(2px);
+      animation: cloudMove 25s linear infinite;
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .cloud::before {
+      width: 80px;
+      height: 80px;
+      left: 30px;
+      bottom: 10px;
+    }
+
+    .cloud::after {
+      width: 100px;
+      height: 100px;
+      right: 25px;
+      bottom: 5px;
+    }
+
+    .cloud.one {
+      top: 12%;
+      left: -220px;
+    }
+
+    .cloud.two {
+      top: 28%;
+      left: -300px;
+      transform: scale(.7);
+      animation-delay: 8s;
+    }
+
+    .cloud.three {
+      top: 45%;
+      left: -250px;
+      transform: scale(1.2);
+      animation-delay: 15s;
+    }
+
+    @keyframes cloudMove {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(130vw);
+      }
+    }
+
+    /* Main */
+
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
+      padding-bottom: 60px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 0;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #facc15;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 30px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.2);
+      font-size: 13px;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #22c55e;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: .3;
+      }
+    }
+
+    /* Hero */
+
+    .hero {
+      text-align: center;
+      padding: 75px 0 100px;
+    }
+
+    .wanted {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 20px;
+      background: #facc15;
+      color: #422006;
+      font-weight: bold;
+      margin-bottom: 20px;
+      transform: rotate(-2deg);
+      box-shadow: 0 5px 20px rgba(0,0,0,.2);
+    }
+
+    h1 {
+      font-size: clamp(50px, 9vw, 100px);
+      line-height: .9;
+      text-transform: uppercase;
+      letter-spacing: -5px;
+      text-shadow: 5px 7px 0 rgba(0,0,0,.2);
+    }
+
+    h1 span {
+      color: #facc15;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 25px auto;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #e0f2fe;
+    }
+
+    .button {
+      display: inline-block;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 30px;
+      background: #ef4444;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,.25);
+      transition: .25s;
+    }
+
+    .button:hover {
+      transform: translateY(-4px) scale(1.03);
+      background: #dc2626;
+    }
+
+    /* Ship */
+
+    .ship {
+      position: relative;
+      width: 220px;
+      height: 100px;
+      margin: 10px auto 0;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .ship-body {
+      position: absolute;
+      bottom: 10px;
+      width: 220px;
+      height: 55px;
+      background: #7c2d12;
+      border-radius: 20px 20px 70px 70px;
+      border-bottom: 10px solid #451a03;
+    }
+
+    .mast {
+      position: absolute;
+      width: 7px;
+      height: 100px;
+      background: #451a03;
+      left: 105px;
+      bottom: 45px;
+    }
+
+    .sail {
+      position: absolute;
+      left: 112px;
+      top: 3px;
+      width: 75px;
+      height: 65px;
+      background: #fff7ed;
+      clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 80%);
+    }
+
+    .flag {
+      position: absolute;
+      top: 0;
+      left: 108px;
+      font-size: 27px;
+    }
+
+    @keyframes float {
+      0%,100% {
+        transform: translateY(0) rotate(-1deg);
+      }
+
+      50% {
+        transform: translateY(-12px) rotate(1deg);
+      }
+    }
+
+    /* Content */
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    .section-title span {
+      color: #facc15;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      padding: 25px;
+      border-radius: 20px;
+      background: rgba(2, 20, 40, .45);
+      border: 1px solid rgba(255,255,255,.15);
+      backdrop-filter: blur(12px);
+      transition: .3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      background: rgba(2, 20, 40, .65);
+    }
+
+    .card-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      color: #facc15;
+    }
+
+    .card p {
+      color: #cbd5e1;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* Bounty */
+
+    .bounty {
+      margin: 70px auto;
+      max-width: 650px;
+      padding: 35px;
+      text-align: center;
+      border: 3px solid #facc15;
+      border-radius: 25px;
+      background: rgba(0,0,0,.3);
+      box-shadow: 0 0 40px rgba(250,204,21,.15);
+    }
+
+    .bounty small {
+      color: #cbd5e1;
+      letter-spacing: 3px;
+    }
+
+    .bounty h2 {
+      font-size: 50px;
+      margin: 10px 0;
+      color: #facc15;
+    }
+
+    .bounty p {
+      color: #cbd5e1;
+    }
+
+    /* Server */
+
+    .server-box {
+      margin-top: 30px;
+      text-align: center;
+      padding: 25px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.25);
+    }
+
+    #serverMessage {
+      margin-top: 12px;
+      color: #bbf7d0;
+      min-height: 20px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 70px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      color: #bae6fd;
+      font-size: 13px;
+    }
+
+    @media(max-width: 700px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        letter-spacing: -3px;
+      }
+
+      .hero {
+        padding-top: 50px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="sky">
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+    <div class="cloud three"></div>
+  </div>
+
+  <div class="container">
+
+```
+<header>
+  <div class="logo">☠ GRAND <span>LINE</span></div>
+
+  <div class="status">
+    <div class="status-dot"></div>
+    <span id="statusText">Checking server...</span>
+  </div>
+</header>
+
+<section class="hero">
+
+  <div class="wanted">WANTED • DEAD OR ALIVE</div>
+
+  <h1>
+    ONE <span>PIECE</span>
+  </h1>
+
+  <p>
+    Set sail across the Grand Line. Gather your crew,
+    chase your dreams, and search for the legendary treasure
+    that awaits at the end of the journey.
+  </p>
+
+  <button class="button" onclick="checkServer()">
+    ⚓ Check My Ship
+  </button>
+
+  <div class="ship">
+    <div class="flag">☠</div>
+    <div class="mast"></div>
+    <div class="sail"></div>
+    <div class="ship-body"></div>
+  </div>
+
+</section>
+
+<h2 class="section-title">
+  The <span>Straw Hat</span> Crew
+</h2>
+
+<section class="cards">
+
+  <div class="card">
+    <div class="card-icon">👒</div>
+    <h3>Monkey D. Luffy</h3>
+    <p>
+      Captain of the Straw Hat Pirates.
+      His dream is to become the Pirate King.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">⚔️</div>
+    <h3>Roronoa Zoro</h3>
+    <p>
+      A swordsman pursuing his dream of becoming
+      the world's greatest swordsman.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">🧭</div>
+    <h3>Nami</h3>
+    <p>
+      The navigator of the crew who dreams of
+      creating a complete map of the world.
+    </p>
+  </div>
+
+</section>
+
+<section class="bounty">
+
+  <small>CURRENT BOUNTY</small>
+
+  <h2>฿ 3,000,000,000</h2>
+
+  <p>
+    The journey continues beyond the horizon.
+  </p>
+
+</section>
+
+<section class="server-box">
+
+  <h2>⚡ Grand Line Server</h2>
+
+  <p style="margin-top:8px;color:#cbd5e1;">
+    Powered by your Node.js HTTP server
+  </p>
+
+  <button
+    class="button"
+    style="margin-top:18px;"
+    onclick="checkServer()">
+    Test Server
+  </button>
+
+  <div id="serverMessage"></div>
+
+</section>
+
+<footer>
+  Grand Line Adventure • Built with HTML, CSS, JavaScript & Node.js
+</footer>
+```
+
+  </div>
+
+  <script>
+
+    async function checkServer() {
+
+      const statusText = document.getElementById("statusText");
+      const message = document.getElementById("serverMessage");
+
+      statusText.textContent = "Checking...";
+
+      try {
+
+        const start = performance.now();
+
+        const response = await fetch("/api/status");
+
+        const end = performance.now();
+
+        if (!response.ok) {
+          throw new Error("Server error");
+        }
+
+        const data = await response.json();
+
+        const latency = Math.round(end - start);
+
+        statusText.textContent = "Server Online";
+
+        message.textContent =
+          `⚡ Connected to ${data.hostname} • ${latency} ms • Node ${data.nodeVersion}`;
+
+      } catch (error) {
+
+        statusText.textContent = "Server Offline";
+
+        message.textContent =
+          "The ship cannot reach the Grand Line server.";
+
+      }
+    }
+
+    checkServer();
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "ec2-practice-app",
+  "version": "1.0.0",
+  "description": "A simple Node.js and HTML web application for practicing AWS EC2 deployment",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["aws", "ec2", "nodejs", "practice"],
+  "author": "",
+  "license": "ISC"
+}
